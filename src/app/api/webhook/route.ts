@@ -1,23 +1,28 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextApiRequest, NextApiResponse } from "next";
 import { supabase } from "@/lib/supabase";
 
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const email = searchParams.get("email");
-  const id = searchParams.get("id");
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Método não permitido" });
+  }
 
-  if (!email || !id) {
-    return NextResponse.json({ message: "Faltando parâmetros" }, { status: 400 });
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ message: "Faltando o parâmetro 'email'" });
   }
 
   // Salvar no Supabase
   const { error } = await supabase.from("leitores").insert([
-    { email, post_id: id, created_at: new Date() },
+    {
+      email,
+      created_at: new Date(), // Data de registro
+    },
   ]);
 
   if (error) {
-    return NextResponse.json({ message: "Erro ao salvar no banco", error }, { status: 500 });
+    return res.status(500).json({ message: "Erro ao salvar no banco", error });
   }
 
-  return NextResponse.json({ message: "Abertura registrada com sucesso!" }, { status: 200 });
+  return res.status(200).json({ message: "Webhook recebido e salvo com sucesso!" });
 }
