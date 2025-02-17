@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Typography } from "@mui/material";
 
 export default function UserDashboard({ email }: { email: string }) {
-  const [streak, setStreak] = useState(0);
+  const [streak] = useState(0);
   const [message, setMessage] = useState("");
 
   useEffect(() => {

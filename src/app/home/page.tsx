@@ -2,9 +2,10 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { Card, CardContent, Typography } from "@mui/material";
+import { User } from "@supabase/supabase-js";
 
 export default function Home() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
   const [streak, setStreak] = useState(0);
 
   useEffect(() => {

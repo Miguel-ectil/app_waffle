@@ -25,6 +25,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ streak: user.streak, badge: badge?.nome || "Sem Badge" });
   } catch (error) {
+    console.error(error, "Erro ao processar...");
     return NextResponse.json({ error: "Erro interno no servidor!" }, { status: 500 });
   }
 }

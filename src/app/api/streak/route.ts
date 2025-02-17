@@ -56,6 +56,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ message: "Streak atualizado!", streak: novoStreak });
   } catch (error) {
+    console.error(error, "Erro ao processar...");
     return NextResponse.json({ error: "Erro interno no servidor!" }, { status: 500 });
   }
 }

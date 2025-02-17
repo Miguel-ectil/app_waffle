@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     }
 
     // Verificar se o streak deve ser resetado
-    const lastOpenedDate = new Date(lastOpened);
+    // const lastOpenedDate = new Date(lastOpened);
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
     const yesterdayString = yesterday.toISOString().split("T")[0];
@@ -53,6 +53,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ message: "Streak atualizado com sucesso", streak: newStreak });
   } catch (error) {
+    console.error(error, "Erro ao processar...");
     return NextResponse.json({ error: "Erro interno no servidor" }, { status: 500 });
   }
 }

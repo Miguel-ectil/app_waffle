@@ -4,8 +4,13 @@ import { supabase } from "@/lib/supabase";
 import { Button, Card, Typography } from "@mui/material";
 import UserDashboard from "./user";
 
+interface RankingEntry {
+  email: string;
+  streak: number;
+}
+
 export default function Dashboard() {
-  const [ranking, setRanking] = useState([]);
+  const [ranking, setRanking] = useState<RankingEntry[]>([]);
 
   useEffect(() => {
     const fetchRanking = async () => {
