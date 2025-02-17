@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
 
   // Salvar no Supabase
   const { error } = await supabase.from("leitores").insert([
-    { email, post_id: id, opened_at: new Date() },
+    { email, post_id: id, created_at: new Date() },
   ]);
 
   if (error) {
